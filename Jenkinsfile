@@ -16,7 +16,7 @@ pipeline {
         steps{
             script {
                 docker.withRegistry('', registryCredential ) {
-                    app.push()
+                    docker.push()
                 }
             }
         }
