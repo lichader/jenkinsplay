@@ -15,7 +15,9 @@ pipeline {
     stage('Deploy Image') {
         steps{
             script {
-                docker.withRegistry('', registryCredential ).push()
+                docker.withRegistry('', registryCredential ) {
+                    def dockerImage = docker.image(registry + ":$BUILD_NUMBER")
+                    dockerImage.push()
             }
         }
     }
