@@ -18,6 +18,7 @@ pipeline {
                 docker.withRegistry('', registryCredential ) {
                     def dockerImage = docker.image(registry + ":$BUILD_NUMBER")
                     dockerImage.push()
+                    dockerImage.push("latest")
                 }
             }
         }
