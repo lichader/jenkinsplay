@@ -12,5 +12,20 @@ pipeline {
         }
       }
     }
+    stage('Deploy Image') {
+        steps{
+            script {
+                docker.withRegistry('', registryCredential ) {
+                    dockerImage.push(registry + ":$BUILD_NUMBER")
+                    dockerImage.push("latest")
+                }
+            }
+        }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
   }
 }
