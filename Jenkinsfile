@@ -28,5 +28,9 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
+    stage('Create new Tag'){
+        sh 'git tag -a "build-$BUILD_NUMBER" -m "test"'
+        sh 'git tag --list'
+    }
   }
 }
