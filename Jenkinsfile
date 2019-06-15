@@ -29,8 +29,11 @@ pipeline {
       }
     }
     stage('Create new Tag'){
+      steps {
         sh 'git tag -a "build-$BUILD_NUMBER" -m "test"'
         sh 'git tag --list'
+      }
+
     }
   }
 }
